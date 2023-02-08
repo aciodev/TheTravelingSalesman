@@ -1,0 +1,15 @@
+goos: darwin
+goarch: arm64
+pkg: main_test
+Benchmark_TSP_Greedy-10    	     100	       858.3 ns/op
+Benchmark_TSP_Greedy-10    	     100	       691.2 ns/op
+Benchmark_TSP_Greedy-10    	     100	       649.2 ns/op
+Benchmark_TSP_Greedy-10    	     100	       673.8 ns/op
+Benchmark_TSP_Greedy-10    	     100	       547.9 ns/op
+Benchmark_TSP_Greedy-10    	     100	       505.8 ns/op
+Benchmark_TSP_Greedy-10    	     100	       500.0 ns/op
+Benchmark_TSP_Greedy-10    	     100	       414.6 ns/op
+Benchmark_TSP_Greedy-10    	     100	       418.8 ns/op
+Benchmark_TSP_Greedy-10    	     100	       421.7 ns/op
+PASS
+ok  	main_test	0.200s
