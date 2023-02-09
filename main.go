@@ -56,6 +56,8 @@ func loadSample(size int) [][]int {
 // tspGreedy - The traveling salesman problem using greedy.
 // TC: O(N^2 * log(N))
 // SC: O(N)
+// Sourced from: https://www.interviewbit.com/blog/travelling-salesman-problem/
+// Translated to Go by Andres Cruz on February 7, 2023
 func tspGreedy(size int, grid [][]int) {
 	sum := 0
 	counter := 0
