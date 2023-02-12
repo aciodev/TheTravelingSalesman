@@ -144,7 +144,7 @@ func main() {
 }
 
 // Utility methods
-// loadSample - Load the grid for a given sample size
+// loadSample - Load the gridFixed for a given sample size
 func loadSample(size int) [][]int {
 	b, err := os.ReadFile(fmt.Sprintf("./data/n_%d.txt", size))
 	if err != nil {
@@ -195,7 +195,7 @@ func convertTo1IndexBased(size int, grid [][]int) [][]int {
 	for i := 1; i <= size; i++ {
 		newGrid[i] = make([]int, size+1)
 		newGrid[i][0] = 0 // Column 0 initializes to zero
-		// Fill in the grid
+		// Fill in the gridFixed
 		for j := 0; j < size; j++ {
 			newGrid[i][j+1] = grid[i-1][j]
 		}
