@@ -58,7 +58,7 @@ func loadSample(size int) [][]int {
 // SC: O(N)
 // Sourced from: https://www.interviewbit.com/blog/travelling-salesman-problem/
 // Translated to Go by Andres Cruz on February 7, 2023
-func tspGreedy(size int, grid [][]int) {
+func tspGreedy(size int, grid [][]int) int {
 	sum := 0
 	counter := 0
 	i, j := 0, 0
@@ -100,10 +100,11 @@ func tspGreedy(size int, grid [][]int) {
 	}
 
 	sum += min
-	//fmt.Println(sum)
+	return sum
 }
 
 func main() {
 	grid := loadSample(5)
-	tspGreedy(5, grid)
+	answer := tspGreedy(5, grid)
+	fmt.Println(answer)
 }
