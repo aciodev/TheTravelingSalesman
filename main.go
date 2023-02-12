@@ -104,7 +104,15 @@ func tspGreedy(size int, grid [][]int) int {
 }
 
 func main() {
-	grid := loadSample(5)
-	answer := tspGreedy(5, grid)
+	sampleSize := 4
+	custom := [][]int{
+		{-1, 10, 15, 20},
+		{10, -1, 35, 25},
+		{15, 35, -1, 30},
+		{20, 25, 30, -1},
+	} // Answer 80. Input credit InterviewBit.com.
+
+	//grid := loadSample(sampleSize)
+	answer := tspGreedy(sampleSize, custom)
 	fmt.Println(answer)
 }
