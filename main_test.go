@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	sizeFixed          = 100
+	sizeFixed          = 5
 	sizeCustom         = 4
 	gridFixed          = loadSample(sizeFixed)
 	gridCustom0Indexed = [][]int{
@@ -17,7 +17,7 @@ var (
 	gridCustom1Indexed = convertTo1IndexBased(sizeCustom, gridCustom0Indexed)
 )
 
-func Benchmark_TSP_Greedy(b *testing.B) {
+func Benchmark_TSP_GreedyFixed(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		tspGreedy(sizeFixed, gridFixed)
 	}
