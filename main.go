@@ -9,50 +9,6 @@ import (
 	"strings"
 )
 
-// loadSample - Load the grid for a given sample size
-func loadSample(size int) [][]int {
-	b, err := os.ReadFile(fmt.Sprintf("./data/n_%d.txt", size))
-	if err != nil {
-		panic(err)
-	}
-
-	r := strings.NewReader(string(b))
-
-	scanner := bufio.NewScanner(r)
-	scanner.Split(bufio.ScanWords)
-
-	slice := make([][]int, size)
-
-	// Make size*size slice
-	for i := 0; i < size; i++ {
-		slice[i] = make([]int, size)
-	}
-
-	i, j := 0, 0
-
-	for scanner.Scan() {
-		x, errConv := strconv.Atoi(scanner.Text())
-		if errConv != nil {
-			panic(errConv)
-		}
-
-		if x < 0 {
-			slice[i][j] = math.MaxInt64
-		} else {
-			slice[i][j] = x
-		}
-
-		j++
-
-		if j == size {
-			j = 0
-			i++
-		}
-	}
-
-	return slice
-}
-
 // tspGreedy - The traveling salesman problem using greedy.
 // TC: O(N^2 * log(N))
 // SC: O(N)
@@ -115,4 +71,49 @@ func main() {
 	//grid := loadSample(sampleSize)
 	answer := tspGreedy(sampleSize, custom)
 	fmt.Println(answer)
+}
+
+// Utility methods
+// loadSample - Load the grid for a given sample size
+func loadSample(size int) [][]int {
+	b, err := os.ReadFile(fmt.Sprintf("./data/n_%d.txt", size))
+	if err != nil {
+		panic(err)
+	}
+
+	r := strings.NewReader(string(b))
+
+	scanner := bufio.NewScanner(r)
+	scanner.Split(bufio.ScanWords)
+
+	slice := make([][]int, size)
+
+	// Make size*size slice
+	for i := 0; i < size; i++ {
+		slice[i] = make([]int, size)
+	}
+
+	i, j := 0, 0
+
+	for scanner.Scan() {
+		x, errConv := strconv.Atoi(scanner.Text())
+		if errConv != nil {
+			panic(errConv)
+		}
+
+		if x < 0 {
+			slice[i][j] = math.MaxInt64
+		} else {
+			slice[i][j] = x
+		}
+
+		j++
+
+		if j == size {
+			j = 0
+			i++
+		}
+	}
+
+	return slice
 }
