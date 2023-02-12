@@ -59,18 +59,88 @@ func tspGreedy(size int, grid [][]int) int {
 	return sum
 }
 
-func main() {
+// tspDynamicProgramming - The traveling salesman problem using dynamic programming.
+// TC: O(N^2 * 2^N)
+// SC: O(N^2)
+// Sourced from: https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/
+// Translated to Go by Andres Cruz on February 12, 2023
+func tspDynamicProgramming(size int, grid [][]int) int {
+	memoHeight := size + 1
+	memoDepth := 1 << (size + 1)
+	// Create memo 2D array
+	memo := make([][]int, memoHeight)
+	for i := 0; i < memoHeight; i++ {
+		memo[i] = make([]int, memoDepth)
+	}
+
+	min := math.MaxInt16
+	for i := 1; i <= size; i++ {
+		mask := (1 << (size + 1)) - 1
+		res := tspDPHelper(i, mask, size, memo, grid) + grid[i][1]
+		min = int(math.Min(float64(min), float64(res)))
+	}
+
+	return min
+}
+
+// tspDPHelper - Helper recursive method for the above function.
+// See the tspDynamicProgramming function above for attribution and other information.
+func tspDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
+	if mask == ((1 << i) | 3) {
+		return grid[1][i]
+	}
+
+	if memo[i][mask] != 0 {
+		return memo[i][mask]
+	}
+
+	min := math.MaxInt16
+	for j := 1; j <= size; j++ {
+		if (mask&(1<<j)) != 0 && j != i && j != 1 {
+			res := tspDPHelper(j, mask&(^(1 << i)), size, memo, grid)
+			min = int(math.Min(float64(min), float64(res+grid[j][i])))
+		}
+	}
+
+	memo[i][mask] = min
+	return min
+}
+
+func testCustomInput() {
+	// Correct answer is 80. Input credit InterviewBit.com.
 	sampleSize := 4
 	custom := [][]int{
 		{-1, 10, 15, 20},
 		{10, -1, 35, 25},
 		{15, 35, -1, 30},
 		{20, 25, 30, -1},
-	} // Answer 80. Input credit InterviewBit.com.
+	}
 
-	//grid := loadSample(sampleSize)
 	answer := tspGreedy(sampleSize, custom)
-	fmt.Println(answer)
+	fmt.Println("Custom input (Greedy):", answer)
+
+	oneIndexed := convertTo1IndexBased(sampleSize, custom)
+	answer = tspDynamicProgramming(sampleSize, oneIndexed)
+	fmt.Println("Custom input (Dynamic Programming):", answer)
+}
+
+func testFixedInputGreedy(size int) {
+	grid := loadSample(size)
+	answer := tspGreedy(size, grid)
+	fmt.Println("Fixed Input (Greedy):", answer)
+}
+
+func testFixedInputDynamicProgramming(size int) {
+	grid := loadSample(size)
+	oneIndexed := convertTo1IndexBased(size, grid)
+	answer := tspDynamicProgramming(size, oneIndexed)
+	fmt.Println("Fixed Input (Dynamic Programming):", answer)
+}
+
+func main() {
+	testCustomInput()
+	testFixedInputGreedy(5)
+	testFixedInputDynamicProgramming(5)
 }
 
 // Utility methods
