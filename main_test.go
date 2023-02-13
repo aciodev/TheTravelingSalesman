@@ -31,14 +31,14 @@ func Benchmark_TSP_DPFixed(b *testing.B) {
 	}
 }
 
-//func Benchmark_TSP_GreedyCustom(b *testing.B) {
-//	for i := 0; i < b.N; i++ {
-//		tspGreedy(sizeCustom, gridCustom0Indexed)
-//	}
-//}
-//
-//func Benchmark_TSP_DPCustom(b *testing.B) {
-//	for i := 0; i < b.N; i++ {
-//		tspDynamicProgramming(sizeCustom, gridCustom1Indexed)
-//	}
-//}
+func Benchmark_TSP_GreedyCustom(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		tspGreedy(sizeCustom, gridCustom0Indexed)
+	}
+}
+
+func Benchmark_TSP_DPCustom(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		tspDynamicProgramming(sizeCustom, gridCustom1Indexed)
+	}
+}
