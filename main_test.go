@@ -1,13 +1,14 @@
 package main
 
 import (
+	"math"
 	"testing"
 )
 
 var (
 	sizeFixed          = 5
 	sizeCustom         = 4
-	gridFixed          = loadSample(sizeFixed)
+	gridFixed          = loadSample(sizeFixed, math.MaxInt32)
 	gridCustom0Indexed = [][]int{
 		{-1, 10, 15, 20},
 		{10, -1, 35, 25},

@@ -73,7 +73,7 @@ func tspDynamicProgramming(size int, grid [][]int) int {
 		memo[i] = make([]int, memoDepth)
 	}
 
-	min := math.MaxInt16
+	min := math.MaxInt32
 	for i := 1; i <= size; i++ {
 		mask := (1 << (size + 1)) - 1
 		res := tspDPHelper(i, mask, size, memo, grid) + grid[i][1]
@@ -94,7 +94,7 @@ func tspDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
 		return memo[i][mask]
 	}
 
-	min := math.MaxInt16
+	min := math.MaxInt32
 	for j := 1; j <= size; j++ {
 		if (mask&(1<<j)) != 0 && j != i && j != 1 {
 			res := tspDPHelper(j, mask&(^(1 << i)), size, memo, grid)
@@ -125,13 +125,13 @@ func testCustomInput() {
 }
 
 func testFixedInputGreedy(size int) {
-	grid := loadSample(size)
+	grid := loadSample(size, math.MaxInt32)
 	answer := tspGreedy(size, grid)
 	fmt.Println("Fixed Input (Greedy):", answer)
 }
 
 func testFixedInputDynamicProgramming(size int) {
-	grid := loadSample(size)
+	grid := loadSample(size, 0) // Represent disconnected edges as '0'
 	oneIndexed := convertTo1IndexBased(size, grid)
 	answer := tspDynamicProgramming(size, oneIndexed)
 	fmt.Println("Fixed Input (Dynamic Programming):", answer)
@@ -145,7 +145,7 @@ func main() {
 
 // Utility methods
 // loadSample - Load the gridFixed for a given sample size
-func loadSample(size int) [][]int {
+func loadSample(size int, disconnect int) [][]int {
 	b, err := os.ReadFile(fmt.Sprintf("./data/n_%d.txt", size))
 	if err != nil {
 		panic(err)
@@ -172,7 +172,7 @@ func loadSample(size int) [][]int {
 		}
 
 		if x < 0 {
-			slice[i][j] = math.MaxInt64
+			slice[i][j] = disconnect
 		} else {
 			slice[i][j] = x
 		}
