@@ -1,0 +1,25 @@
+goos: darwin
+goarch: arm64
+pkg: main_test
+Benchmark_TSP_GreedyFixed-10    	     100	      1168 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	      1238 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	      1018 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	      1019 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       941.7 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       957.5 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       937.5 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       922.1 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       927.9 ns/op
+Benchmark_TSP_GreedyFixed-10    	     100	       959.2 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    242198 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    234415 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    232306 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    224949 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    229823 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    227268 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    226428 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    227340 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    227163 ns/op
+Benchmark_TSP_DPFixed-10        	     100	    227922 ns/op
+PASS
+ok  	main_test	0.337s
