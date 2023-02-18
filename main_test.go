@@ -8,7 +8,7 @@ import (
 var (
 	sizeFixed          = 25
 	sizeCustom         = 4
-	gridFixed          = loadSample(sizeFixed, math.MaxInt32)
+	gridFixed          = loadSample(sizeFixed, math.MaxInt32, false)
 	gridFixed1Indexed  = convertTo1IndexBased(sizeFixed, gridFixed)
 	gridCustom0Indexed = [][]int{
 		{-1, 10, 15, 20},
