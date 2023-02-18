@@ -2,7 +2,7 @@
 
 Run the benchmark
 ```bash
-go test -bench=. -benchtime=100x -benchmem -count 10 | tee res.txt
+go test -bench=. -benchtime=10x -benchmem -count 10 | tee res.txt
 ```
 
 Analyze the information

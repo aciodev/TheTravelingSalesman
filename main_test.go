@@ -1,44 +1,55 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
 
 var (
-	sizeFixed          = 25
-	sizeCustom         = 4
-	gridFixed          = loadSample(sizeFixed, math.MaxInt32, false)
-	gridFixed1Indexed  = convertTo1IndexBased(sizeFixed, gridFixed)
-	gridCustom0Indexed = [][]int{
-		{-1, 10, 15, 20},
-		{10, -1, 35, 25},
-		{15, 35, -1, 30},
-		{20, 25, 30, -1},
+	inputsZeroIndexed = map[int][][]int{
+		5:   loadSample(5, math.MaxInt32, false),
+		6:   loadSample(6, math.MaxInt32, false),
+		7:   loadSample(7, math.MaxInt32, false),
+		8:   loadSample(8, math.MaxInt32, false),
+		9:   loadSample(9, math.MaxInt32, false),
+		10:  loadSample(10, math.MaxInt32, false),
+		25:  loadSample(25, math.MaxInt32, false),
+		50:  loadSample(50, math.MaxInt32, false),
+		100: loadSample(100, math.MaxInt32, false),
 	}
-	gridCustom1Indexed = convertTo1IndexBased(sizeCustom, gridCustom0Indexed)
+
+	inputs1Indexed = map[int][][]int{
+		5:   loadSample(5, 0, true),
+		6:   loadSample(6, 0, true),
+		7:   loadSample(7, 0, true),
+		8:   loadSample(8, 0, true),
+		9:   loadSample(9, 0, true),
+		10:  loadSample(10, 0, true),
+		25:  loadSample(25, 0, true),
+		50:  loadSample(50, 0, true),
+		100: loadSample(100, 0, true),
+	}
+
+	testCases = []int{5, 6, 7, 8, 9, 10, 25, 50, 100}
 )
 
-func Benchmark_TSP_GreedyFixed(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		tspGreedy(sizeFixed, gridFixed)
+func Benchmark_TSP_Greedy(b *testing.B) {
+	for _, v := range testCases {
+		b.Run(fmt.Sprintf("greedy_input_size_%d", v), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				tspGreedy(v, inputsZeroIndexed[v])
+			}
+		})
 	}
 }
 
-func Benchmark_TSP_DPFixed(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		tspDynamicProgramming(sizeFixed, gridFixed1Indexed)
-	}
-}
-
-func Benchmark_TSP_GreedyCustom(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		tspGreedy(sizeCustom, gridCustom0Indexed)
-	}
-}
-
-func Benchmark_TSP_DPCustom(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		tspDynamicProgramming(sizeCustom, gridCustom1Indexed)
+func Benchmark_TSP_DP(b *testing.B) {
+	for _, v := range testCases {
+		b.Run(fmt.Sprintf("greedy_input_size_%d", v), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				tspDynamicProgramming(v, inputs1Indexed[v])
+			}
+		})
 	}
 }
