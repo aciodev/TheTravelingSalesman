@@ -17,3 +17,6 @@
 # Go stuff
 .idea
 .DS_Store
+
+# Project specific
+res.txt
