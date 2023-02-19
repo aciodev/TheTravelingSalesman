@@ -34,9 +34,9 @@ var (
 	testCases = []int{5, 6, 7, 8, 9, 10, 25, 50, 100}
 )
 
-func Benchmark_TSP_Greedy(b *testing.B) {
+func BenchmarkGreedy(b *testing.B) {
 	for _, v := range testCases {
-		b.Run(fmt.Sprintf("greedy_input_size_%d", v), func(b *testing.B) {
+		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				tspGreedy(v, inputsZeroIndexed[v])
 			}
@@ -44,9 +44,9 @@ func Benchmark_TSP_Greedy(b *testing.B) {
 	}
 }
 
-func Benchmark_TSP_DP(b *testing.B) {
+func BenchmarkDynamicProgramming(b *testing.B) {
 	for _, v := range testCases {
-		b.Run(fmt.Sprintf("greedy_input_size_%d", v), func(b *testing.B) {
+		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				tspDynamicProgramming(v, inputs1Indexed[v])
 			}
