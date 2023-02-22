@@ -10,6 +10,21 @@ var (
 	testCases = []int{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 )
 
+func TestGreedy(t *testing.T) {
+	solution := 80
+	zeroIndexed := [][]int{
+		{-1, 10, 15, 20},
+		{10, -1, 35, 25},
+		{15, 35, -1, 30},
+		{20, 25, 30, -1},
+	}
+
+	result := tspGreedy(4, zeroIndexed)
+	if result != solution {
+		t.Fatalf("Greedy calculated %d but expected %d", solution, result)
+	}
+}
+
 func BenchmarkGreedy(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
