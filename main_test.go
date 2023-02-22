@@ -2,12 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"testing"
-)
-
-var (
-	testCases = []int{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 )
 
 func TestGreedy(t *testing.T) {
@@ -65,22 +60,4 @@ func BenchmarkDynamicProgramming(b *testing.B) {
 			}
 		})
 	}
-}
-
-// Helper function to create isolated data (zero indexed)
-func createZeroIndexedInput() map[int][][]int {
-	inputsZeroIndexed := make(map[int][][]int)
-	for _, testCase := range testCases {
-		inputsZeroIndexed[testCase] = loadSample(testCase, math.MaxInt32, false)
-	}
-	return inputsZeroIndexed
-}
-
-// Helper function to create isolated data (zero indexed)
-func createOneIndexedInput() map[int][][]int {
-	inputsOneIndexed := make(map[int][][]int)
-	for _, testCase := range testCases {
-		inputsOneIndexed[testCase] = loadSample(testCase, 0, true)
-	}
-	return inputsOneIndexed
 }
