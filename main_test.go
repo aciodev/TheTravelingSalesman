@@ -51,3 +51,25 @@ func BenchmarkDynamicProgramming(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkParallelNoRoutines(b *testing.B) {
+	inputsZeroIndexed := createZeroIndexedInput()
+	b.ResetTimer()
+	parallelRoutineHelper(b, inputsZeroIndexed, false)
+}
+
+func BenchmarkParallelWithRoutines(b *testing.B) {
+	inputsZeroIndexed := createZeroIndexedInput()
+	b.ResetTimer()
+	parallelRoutineHelper(b, inputsZeroIndexed, true)
+}
+
+func parallelRoutineHelper(b *testing.B, inputsZeroIndexed map[int][][]int, useRoutines bool) {
+	for _, v := range testCases {
+		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				tspParallel(inputsZeroIndexed[v], v, useRoutines)
+			}
+		})
+	}
+}
