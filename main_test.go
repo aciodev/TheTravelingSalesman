@@ -25,6 +25,22 @@ func TestGreedy(t *testing.T) {
 	}
 }
 
+func TestDynamicProgramming(t *testing.T) {
+	solution := 80
+	oneIndexed := [][]int{
+		{0, 0, 0, 0, 0},
+		{0, -1, 10, 15, 20},
+		{0, 10, -1, 35, 25},
+		{0, 15, 35, -1, 30},
+		{0, 20, 25, 30, -1},
+	}
+
+	result := tspDynamicProgramming(4, oneIndexed)
+	if result != solution {
+		t.Fatalf("DynamicProgramming calculated %d but expected %d", solution, result)
+	}
+}
+
 func BenchmarkGreedy(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
