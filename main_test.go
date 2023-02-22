@@ -19,6 +19,13 @@ func TestDynamicProgramming(t *testing.T) {
 	}
 }
 
+func TestParallelProgramming(t *testing.T) {
+	result := tspParallel(knownInputZI, 4, false)
+	if result != knownInputSol {
+		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+	}
+}
+
 func BenchmarkGreedy(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
