@@ -200,18 +200,3 @@ func loadSample(size int, disconnect int, oneIndexed bool) [][]int {
 
 	return slice
 }
-
-// convertTo1IndexBased - Add a row and column of zeroes
-func convertTo1IndexBased(size int, grid [][]int) [][]int {
-	newGrid := make([][]int, size+1)
-	newGrid[0] = make([]int, size+1) // Fill top row with zeroes
-	for i := 1; i <= size; i++ {
-		newGrid[i] = make([]int, size+1)
-		newGrid[i][0] = 0 // Column 0 initializes to zero
-		// Fill in the gridFixed
-		for j := 0; j < size; j++ {
-			newGrid[i][j+1] = grid[i-1][j]
-		}
-	}
-	return newGrid
-}
