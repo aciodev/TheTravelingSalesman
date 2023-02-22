@@ -3,54 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"strings"
 )
-
-func testCustomInput() {
-	// Correct answer is 80. Input credit InterviewBit.com.
-	sampleSize := 4
-	zeroIndexed := [][]int{
-		{-1, 10, 15, 20},
-		{10, -1, 35, 25},
-		{15, 35, -1, 30},
-		{20, 25, 30, -1},
-	}
-
-	oneIndexed := [][]int{
-		{0, 0, 0, 0, 0},
-		{0, -1, 10, 15, 20},
-		{0, 10, -1, 35, 25},
-		{0, 15, 35, -1, 30},
-		{0, 20, 25, 30, -1},
-	}
-
-	answer := tspGreedy(sampleSize, zeroIndexed)
-	fmt.Println("Custom input (Greedy):", answer)
-
-	answer = tspDynamicProgramming(sampleSize, oneIndexed)
-	fmt.Println("Custom input (Dynamic Programming):", answer)
-}
-
-func testFixedInputGreedy(size int) {
-	grid := loadSample(size, math.MaxInt32, false)
-	answer := tspGreedy(size, grid)
-	fmt.Println("Fixed Input (Greedy):", answer)
-}
-
-func testFixedInputDynamicProgramming(size int) {
-	grid := loadSample(size, 0, true) // Represent disconnected edges as '0'
-	answer := tspDynamicProgramming(size, grid)
-	fmt.Println("Fixed Input (Dynamic Programming):", answer)
-}
-
-func main() {
-	testCustomInput()
-	testFixedInputGreedy(5)
-	testFixedInputDynamicProgramming(5)
-}
 
 // Utility methods
 // loadSample - Load the gridFixed for a given sample size
