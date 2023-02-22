@@ -6,33 +6,16 @@ import (
 )
 
 func TestGreedy(t *testing.T) {
-	solution := 80
-	zeroIndexed := [][]int{
-		{-1, 10, 15, 20},
-		{10, -1, 35, 25},
-		{15, 35, -1, 30},
-		{20, 25, 30, -1},
-	}
-
-	result := tspGreedy(4, zeroIndexed)
-	if result != solution {
-		t.Fatalf("Greedy calculated %d but expected %d", solution, result)
+	result := tspGreedy(4, knownInputZI)
+	if result != knownInputSol {
+		t.Fatalf("Greedy calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestDynamicProgramming(t *testing.T) {
-	solution := 80
-	oneIndexed := [][]int{
-		{0, 0, 0, 0, 0},
-		{0, -1, 10, 15, 20},
-		{0, 10, -1, 35, 25},
-		{0, 15, 35, -1, 30},
-		{0, 20, 25, 30, -1},
-	}
-
-	result := tspDynamicProgramming(4, oneIndexed)
-	if result != solution {
-		t.Fatalf("DynamicProgramming calculated %d but expected %d", solution, result)
+	result := tspDynamicProgramming(4, knownInput1I)
+	if result != knownInputSol {
+		t.Fatalf("DynamicProgramming calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
