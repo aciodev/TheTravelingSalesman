@@ -2,12 +2,12 @@ package main
 
 import "math"
 
-// tspDynamicProgramming - The traveling salesman problem using dynamic programming.
+// tspSeqDP - The traveling salesman problem using dynamic programming.
 // TC: O(N^2 * 2^N)
 // SC: O(N^2)
 // Sourced from: https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/
 // Translated to Go by Andres Cruz on February 12, 2023
-func tspDynamicProgramming(size int, grid [][]int) int {
+func tspSeqDP(size int, grid [][]int) int {
 	memoHeight := size + 1
 	memoDepth := 1 << (size + 1)
 	// Create memo 2D array
@@ -27,7 +27,7 @@ func tspDynamicProgramming(size int, grid [][]int) int {
 }
 
 // tspDPHelper - Helper recursive method for the above function.
-// See the tspDynamicProgramming function above for attribution and other information.
+// See the tspSeqDP function above for attribution and other information.
 func tspDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
 	if mask == ((1 << i) | 3) {
 		return grid[1][i]

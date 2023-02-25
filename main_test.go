@@ -8,21 +8,21 @@ import (
 // ------------- Tests -------------
 
 func TestSeqGreedy(t *testing.T) {
-	result := tspGreedy(4, knownInputZI)
+	result := tspSeqGreedy(4, knownInputZI)
 	if result != knownInputSol {
 		t.Fatalf("Greedy calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestSeqDP(t *testing.T) {
-	result := tspDynamicProgramming(4, knownInput1I)
+	result := tspSeqDP(4, knownInput1I)
 	if result != knownInputSol {
 		t.Fatalf("DynamicProgramming calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestParGenetic(t *testing.T) {
-	result := tspGeneticParallel(knownInputZI, 4, false)
+	result := tspParGenetic(knownInputZI, 4, false)
 	if result != knownInputSol {
 		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
 	}
@@ -37,7 +37,7 @@ func BenchmarkSeqGreedy(b *testing.B) {
 	for _, v := range testCases {
 		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				tspGreedy(v, inputsZeroIndexed[v])
+				tspSeqGreedy(v, inputsZeroIndexed[v])
 			}
 		})
 	}
@@ -50,7 +50,7 @@ func BenchmarkSeqDP(b *testing.B) {
 	for _, v := range testCases {
 		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				tspDynamicProgramming(v, inputsOneIndexed[v])
+				tspSeqDP(v, inputsOneIndexed[v])
 			}
 		})
 	}
@@ -72,7 +72,7 @@ func tspGeneticRoutineHelper(b *testing.B, inputsZeroIndexed map[int][][]int, us
 	for _, v := range testCases {
 		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				tspGeneticParallel(inputsZeroIndexed[v], v, useRoutines)
+				tspParGenetic(inputsZeroIndexed[v], v, useRoutines)
 			}
 		})
 	}
