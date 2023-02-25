@@ -27,6 +27,21 @@ var (
 	testCases     = []int{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 )
 
+// Okay, I know what you're thinking. Why defined a min
+// function when math.Min is already available? The rationale
+// is as follows:
+//   - We do not care about special cases (inf, NaN, Signbit)
+//   - The min function takes float64 as an argument, but we are working
+//     with int. This causes unnecessary type conversions to parameterize,
+//     and then to cast the result back to an int.
+func intMin(a, b int) int {
+	if a < b {
+		return a
+	}
+
+	return b
+}
+
 // Helper function to create isolated data (zero indexed)
 func createZeroIndexedInput() map[int][][]int {
 	inputsZeroIndexed := make(map[int][][]int)

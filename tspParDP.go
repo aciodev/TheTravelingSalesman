@@ -36,7 +36,7 @@ func tspParDP(size int, grid [][]int) int {
 	// Wait for the threads to all return
 	min := math.MaxInt32
 	for i := 0; i < size; i += 1 {
-		min = int(math.Min(float64(min), float64(<-channel)))
+		min = intMin(min, <-channel)
 	}
 
 	return min
@@ -57,7 +57,7 @@ func tspParDPHelper(worker, i, mask, size int, memo [][][]int, grid [][]int) int
 	for j := 1; j <= size; j++ {
 		if (mask&(1<<j)) != 0 && j != i && j != 1 {
 			res := tspParDPHelper(worker, j, mask&(^(1 << i)), size, memo, grid)
-			min = int(math.Min(float64(min), float64(res+grid[j][i])))
+			min = intMin(min, res+grid[j][i])
 		}
 	}
 
