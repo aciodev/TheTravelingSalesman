@@ -19,8 +19,8 @@ func TestDynamicProgramming(t *testing.T) {
 	}
 }
 
-func TestParallelProgramming(t *testing.T) {
-	result := tspParallel(knownInputZI, 4, false)
+func TestGeneticParallelProgramming(t *testing.T) {
+	result := tspGeneticParallel(knownInputZI, 4, false)
 	if result != knownInputSol {
 		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
 	}
@@ -52,23 +52,23 @@ func BenchmarkDynamicProgramming(b *testing.B) {
 	}
 }
 
-func BenchmarkParallelNoRoutines(b *testing.B) {
+func BenchmarkGeneticParallelNoRoutines(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
-	parallelRoutineHelper(b, inputsZeroIndexed, false)
+	tspGeneticParallelRoutineHelper(b, inputsZeroIndexed, false)
 }
 
-func BenchmarkParallelWithRoutines(b *testing.B) {
+func BenchmarkGeneticParallelWithRoutines(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
-	parallelRoutineHelper(b, inputsZeroIndexed, true)
+	tspGeneticParallelRoutineHelper(b, inputsZeroIndexed, true)
 }
 
-func parallelRoutineHelper(b *testing.B, inputsZeroIndexed map[int][][]int, useRoutines bool) {
+func tspGeneticParallelRoutineHelper(b *testing.B, inputsZeroIndexed map[int][][]int, useRoutines bool) {
 	for _, v := range testCases {
 		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				tspParallel(inputsZeroIndexed[v], v, useRoutines)
+				tspGeneticParallel(inputsZeroIndexed[v], v, useRoutines)
 			}
 		})
 	}

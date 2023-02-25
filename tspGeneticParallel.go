@@ -12,7 +12,7 @@ type offspring struct {
 	fitness int
 }
 
-// tspParallel - The traveling salesman problem using parallel programming.
+// tspGeneticParallel - The traveling salesman problem using parallel programming (genetic algorithms.)
 // TC: O(N^2)
 // SC: O(N)
 // Sourced from: https://www.geeksforgeeks.org/traveling-salesman-problem-using-genetic-algorithm/
@@ -21,7 +21,7 @@ type offspring struct {
 //  1. Introduce multi-threading option via go-routines
 //  2. Change genome to []int rather than string
 //  3. Major code refactor
-func tspParallel(grid [][]int, n int, useGoRoutines bool) int {
+func tspGeneticParallel(grid [][]int, n int, useGoRoutines bool) int {
 	maxPopSize := 10
 
 	// Create the initial population
@@ -80,7 +80,7 @@ func tspParallel(grid [][]int, n int, useGoRoutines bool) int {
 	return solution
 }
 
-// mutate - see tspParallel for citation
+// mutate - see tspGeneticParallel for citation
 func mutate(genome []int, n int) {
 	for {
 		x := generateRandomNumber(1, n)
@@ -94,7 +94,7 @@ func mutate(genome []int, n int) {
 	}
 }
 
-// randomGenome - see tspParallel for citation
+// randomGenome - see tspGeneticParallel for citation
 func randomGenome(n int) []int {
 	size := n + 1
 	slice := make([]int, size)
@@ -115,7 +115,7 @@ func randomGenome(n int) []int {
 	return slice
 }
 
-// calculateFitness - see tspParallel for citation
+// calculateFitness - see tspGeneticParallel for citation
 func calculateFitness(genome []int, grid [][]int, n int) int {
 	fitness := 0
 	for i := 0; i < n; i += 1 {
@@ -124,12 +124,12 @@ func calculateFitness(genome []int, grid [][]int, n int) int {
 	return fitness
 }
 
-// calculateCoolDown - see tspParallel for citation
+// calculateCoolDown - see tspGeneticParallel for citation
 func calculateCoolDown(temp int) int {
 	return (90 * temp) / 100
 }
 
-// generateOffSpring - see tspParallel for citation
+// generateOffSpring - see tspGeneticParallel for citation
 func generateOffSpring(tempSalesman offspring, grid [][]int, n, temperature int) offspring {
 	for {
 		mutate(tempSalesman.genome, n)
