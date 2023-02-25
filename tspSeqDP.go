@@ -19,16 +19,16 @@ func tspSeqDP(size int, grid [][]int) int {
 	min := math.MaxInt32
 	for i := 1; i <= size; i++ {
 		mask := (1 << (size + 1)) - 1
-		res := tspDPHelper(i, mask, size, memo, grid) + grid[i][1]
+		res := tspSeqDPHelper(i, mask, size, memo, grid) + grid[i][1]
 		min = int(math.Min(float64(min), float64(res)))
 	}
 
 	return min
 }
 
-// tspDPHelper - Helper recursive method for the above function.
+// tspSeqDPHelper - Helper recursive method for the above function.
 // See the tspSeqDP function above for attribution and other information.
-func tspDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
+func tspSeqDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
 	if mask == ((1 << i) | 3) {
 		return grid[1][i]
 	}
@@ -40,7 +40,7 @@ func tspDPHelper(i, mask, size int, memo [][]int, grid [][]int) int {
 	min := math.MaxInt32
 	for j := 1; j <= size; j++ {
 		if (mask&(1<<j)) != 0 && j != i && j != 1 {
-			res := tspDPHelper(j, mask&(^(1 << i)), size, memo, grid)
+			res := tspSeqDPHelper(j, mask&(^(1 << i)), size, memo, grid)
 			min = int(math.Min(float64(min), float64(res+grid[j][i])))
 		}
 	}
