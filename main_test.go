@@ -56,6 +56,19 @@ func BenchmarkSeqDP(b *testing.B) {
 	}
 }
 
+func BenchmarkParDP(b *testing.B) {
+	inputsOneIndexed := createOneIndexedInput()
+	b.ResetTimer()
+
+	for _, v := range testCases {
+		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				tspParDP(v, inputsOneIndexed[v])
+			}
+		})
+	}
+}
+
 func BenchmarkParGeneticNoRoutines(b *testing.B) {
 	inputsZeroIndexed := createZeroIndexedInput()
 	b.ResetTimer()
