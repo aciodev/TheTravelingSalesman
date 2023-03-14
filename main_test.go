@@ -10,35 +10,35 @@ import (
 func TestSeqGreedy(t *testing.T) {
 	result := tspSeqGreedy(4, knownInputZI)
 	if result != knownInputSol {
-		t.Fatalf("Greedy calculated %d but expected %d", knownInputSol, result)
+		t.Fatalf("TestSeqGreedy calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestSeqDP(t *testing.T) {
 	result := tspSeqDP(4, knownInput1I)
 	if result != knownInputSol {
-		t.Fatalf("DynamicProgramming calculated %d but expected %d", knownInputSol, result)
+		t.Fatalf("TestSeqDP calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestParGenetic(t *testing.T) {
 	result := tspParGenetic(knownInputZI, 4, false)
 	if result != knownInputSol {
-		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+		t.Fatalf("TestParGenetic calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestParDPv1(t *testing.T) {
 	result := tspParDPv1(4, knownInput1I)
 	if result != knownInputSol {
-		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+		t.Fatalf("TestParDPv1 calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
 func TestParDPv2(t *testing.T) {
 	result := tspParDPv2(4, knownInput1I)
 	if result != knownInputSol {
-		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+		t.Fatalf("TestParDPv2 calculated %d but expected %d", knownInputSol, result)
 	}
 }
 
