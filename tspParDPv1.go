@@ -2,7 +2,7 @@ package main
 
 import "math"
 
-// tspParDPHelper - The traveling salesman problem using dynamic programming.
+// tspParDPv1Helper - The traveling salesman problem using dynamic programming.
 // TC: O(N^2 * 2^N)
 // SC: O(N^2)
 // Sourced from: https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/
@@ -29,7 +29,7 @@ func tspParDPv1(size int, grid [][]int) int {
 	for i := 1; i <= size; i++ {
 		go func(i int) {
 			mask := (1 << (size + 1)) - 1
-			channel <- tspParDPHelper(i-1, i, mask, size, memo, grid) + grid[i][1]
+			channel <- tspParDPv1Helper(i-1, i, mask, size, memo, grid) + grid[i][1]
 		}(i)
 	}
 
@@ -44,7 +44,7 @@ func tspParDPv1(size int, grid [][]int) int {
 
 // tspSeqDPHelper - Helper recursive method for the above function.
 // See the tspSeqDP function above for attribution and other information.
-func tspParDPHelper(worker, i, mask, size int, memo [][][]int, grid [][]int) int {
+func tspParDPv1Helper(worker, i, mask, size int, memo [][][]int, grid [][]int) int {
 	if mask == ((1 << i) | 3) {
 		return grid[1][i]
 	}
@@ -56,7 +56,7 @@ func tspParDPHelper(worker, i, mask, size int, memo [][][]int, grid [][]int) int
 	min := math.MaxInt32
 	for j := 1; j <= size; j++ {
 		if (mask&(1<<j)) != 0 && j != i && j != 1 {
-			res := tspParDPHelper(worker, j, mask&(^(1 << i)), size, memo, grid)
+			res := tspParDPv1Helper(worker, j, mask&(^(1 << i)), size, memo, grid)
 			min = intMin(min, res+grid[j][i])
 		}
 	}
