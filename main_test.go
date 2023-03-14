@@ -28,6 +28,20 @@ func TestParGenetic(t *testing.T) {
 	}
 }
 
+func TestParDPv1(t *testing.T) {
+	result := tspParDPv1(4, knownInput1I)
+	if result != knownInputSol {
+		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+	}
+}
+
+func TestParDPv2(t *testing.T) {
+	result := tspParDPv2(4, knownInput1I)
+	if result != knownInputSol {
+		t.Fatalf("ParallelProgramming calculated %d but expected %d", knownInputSol, result)
+	}
+}
+
 // ------------- Benchmarks -------------
 
 func BenchmarkSeqGreedy(b *testing.B) {
