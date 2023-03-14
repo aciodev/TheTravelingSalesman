@@ -56,14 +56,14 @@ func BenchmarkSeqDP(b *testing.B) {
 	}
 }
 
-func BenchmarkParDP(b *testing.B) {
+func BenchmarkParDPv1(b *testing.B) {
 	inputsOneIndexed := createOneIndexedInput()
 	b.ResetTimer()
 
 	for _, v := range testCases {
 		b.Run(fmt.Sprintf("n_%d", v), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				tspParDP(v, inputsOneIndexed[v])
+				tspParDPv1(v, inputsOneIndexed[v])
 			}
 		})
 	}

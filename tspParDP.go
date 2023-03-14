@@ -7,7 +7,7 @@ import "math"
 // SC: O(N^2)
 // Sourced from: https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/
 // Translated to Go by Andres Cruz on February 12, 2023
-func tspParDP(size int, grid [][]int) int {
+func tspParDPv1(size int, grid [][]int) int {
 	memoHeight := size + 1
 	memoDepth := 1 << (size + 1)
 	// Create memo 3D array
