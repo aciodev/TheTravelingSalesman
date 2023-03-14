@@ -2,7 +2,7 @@ package main
 
 import "math"
 
-// tspParDPv1Helper - The traveling salesman problem using dynamic programming.
+// tspParDPv1 - The traveling salesman problem using dynamic programming.
 // TC: O(N^2 * 2^N)
 // SC: O(N^2)
 // Sourced from: https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/
@@ -42,8 +42,8 @@ func tspParDPv1(size int, grid [][]int) int {
 	return min
 }
 
-// tspSeqDPHelper - Helper recursive method for the above function.
-// See the tspSeqDP function above for attribution and other information.
+// tspParDPv1Helper - Helper recursive method for the above function.
+// See the tspParDPv1 function above for attribution and other information.
 func tspParDPv1Helper(worker, i, mask, size int, memo [][][]int, grid [][]int) int {
 	if mask == ((1 << i) | 3) {
 		return grid[1][i]
